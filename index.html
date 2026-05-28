@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+<h1>This is a Heading</h1>
+<p>This is a paragraph.</p>
+
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+<h1>This is a Heading</h1>
+<p>This is a paragraph.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foliorise — Your Portfolio. Built in Hours.</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #070714;
+    --bg2: #0c0c24;
+    --purple: #6c3fd4;
+    --violet: #8b5cf6;
+    --blue: #3b82f6;
+    --indigo: #4f46e5;
+    --glow: rgba(108,63,212,0.35);
+    --glass: rgba(255,255,255,0.04);
+    --glass-border: rgba(255,255,255,0.10);
+    --text: #f0eeff;
+    --muted: rgba(210,200,255,0.55);
+    --accent: #c084fc;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.028;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ── MESH BG ── */
+  .mesh {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 80% 60% at 15% 10%, rgba(108,63,212,0.22) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 85% 80%, rgba(59,130,246,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 40% at 50% 50%, rgba(139,92,246,0.10) 0%, transparent 60%);
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 6%;
+    background: rgba(7,7,20,0.7);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--glass-border);
+    animation: fadeDown 0.7s ease both;
+  }
+  .logo {
+    font-size: 1.35rem; font-weight: 700; letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #c084fc, #818cf8);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .logo span { opacity: 0.6; font-weight: 400; }
+  nav a {
+    color: var(--muted); text-decoration: none; font-size: 0.9rem;
+    font-weight: 500; transition: color 0.2s;
+  }
+  nav a:hover { color: var(--text); }
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .nav-cta {
+    background: linear-gradient(135deg, var(--purple), var(--indigo));
+    color: #fff !important;
+    padding: 0.5rem 1.2rem; border-radius: 8px;
+    transition: opacity 0.2s, transform 0.2s !important;
+  }
+  .nav-cta:hover { opacity: 0.88; transform: translateY(-1px) !important; }
+
+  /* ── SECTIONS WRAPPER ── */
+  section { position: relative; z-index: 1; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 10rem 6% 6rem;
+  }
+  .badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3);
+    color: #c084fc; padding: 0.4rem 1rem; border-radius: 100px;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+  .badge-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #c084fc;
+    box-shadow: 0 0 8px #c084fc;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100%{opacity:1;transform:scale(1)}
+    50%{opacity:0.6;transform:scale(1.4)}
+  }
+  h1 {
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 700; line-height: 1.08;
+    letter-spacing: -0.04em;
+    animation: fadeUp 0.8s 0.35s ease both;
+  }
+  h1 .line1 { display: block; color: var(--text); }
+  h1 .line2 {
+    display: block;
+    background: linear-gradient(135deg, #c084fc 0%, #818cf8 50%, #60a5fa 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero-sub {
+    margin-top: 1.4rem; max-width: 520px;
+    color: var(--muted); font-size: 1.1rem; font-weight: 400;
+    animation: fadeUp 0.8s 0.5s ease both;
+  }
+  .hero-actions {
+    display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; justify-content: center;
+    animation: fadeUp 0.8s 0.65s ease both;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: linear-gradient(135deg, #7c3aed, #4f46e5);
+    color: #fff; text-decoration: none;
+    padding: 0.85rem 2rem; border-radius: 12px;
+    font-weight: 600; font-size: 1rem;
+    box-shadow: 0 0 30px rgba(108,63,212,0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 45px rgba(108,63,212,0.7);
+  }
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    border: 1px solid var(--glass-border); color: var(--muted);
+    text-decoration: none; padding: 0.85rem 2rem;
+    border-radius: 12px; font-weight: 500; font-size: 1rem;
+    transition: background 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { background: var(--glass); color: var(--text); }
+
+  .hero-scroll {
+    margin-top: 5rem;
+    animation: fadeUp 0.8s 0.85s ease both;
+    color: var(--muted); font-size: 0.82rem; letter-spacing: 0.12em;
+    text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 0.7rem;
+  }
+  .scroll-line {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, rgba(139,92,246,0.6), transparent);
+    animation: scrollDrop 2s infinite;
+  }
+  @keyframes scrollDrop {
+    0%{transform:scaleY(0);transform-origin:top}
+    50%{transform:scaleY(1);transform-origin:top}
+    51%{transform-origin:bottom}
+    100%{transform:scaleY(0);transform-origin:bottom}
+  }
+
+  /* ── SHARED ── */
+  .section-label {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+    color: #8b5cf6; margin-bottom: 1rem;
+  }
+  .section-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700; letter-spacing: -0.03em; line-height: 1.15;
+  }
+  .section-sub {
+    color: var(--muted); font-size: 1rem; max-width: 480px; margin: 1rem auto 0;
+  }
+  .section-header { text-align: center; margin-bottom: 3.5rem; }
+
+  /* ── GLASS CARD ── */
+  .glass {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+  }
+
+  /* ── HOW IT WORKS ── */
+  #how { padding: 6rem 6%; }
+  .steps-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem; max-width: 900px; margin: 0 auto;
+  }
+  .step-card {
+    padding: 2rem; position: relative; overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .step-card::before {
+    content: '';
+    position: absolute; inset: 0; border-radius: 20px;
+    background: linear-gradient(135deg, rgba(139,92,246,0.08), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .step-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(108,63,212,0.2); }
+  .step-card:hover::before { opacity: 1; }
+  .step-num {
+    font-size: 3.5rem; font-weight: 700; letter-spacing: -0.05em;
+    background: linear-gradient(135deg, rgba(139,92,246,0.5), rgba(59,130,246,0.3));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    line-height: 1; margin-bottom: 1rem;
+  }
+  .step-icon {
+    width: 48px; height: 48px; border-radius: 14px;
+    background: linear-gradient(135deg, rgba(124,58,237,0.3), rgba(79,70,229,0.2));
+    border: 1px solid rgba(139,92,246,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; margin-bottom: 1.2rem;
+  }
+  .step-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .step-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+  .step-connector {
+    display: none;
+  }
+
+  /* ── EXAMPLES ── */
+  #examples { padding: 6rem 6%; background: rgba(10,8,30,0.5); }
+  .examples-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem; max-width: 1000px; margin: 0 auto;
+  }
+  .portfolio-card {
+    border-radius: 20px; overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+  }
+  .portfolio-card:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 30px 80px rgba(108,63,212,0.25);
+  }
+  .card-preview {
+    height: 200px; position: relative;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .card-preview-1 {
+    background: linear-gradient(135deg, #1a1040 0%, #2d1b69 50%, #1e1b4b 100%);
+  }
+  .card-preview-2 {
+    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+  }
+  .card-preview-3 {
+    background: linear-gradient(135deg, #200122 0%, #6f0000 50%, #200122 100%);
+  }
+  .card-preview-mock {
+    width: 70%; position: relative;
+  }
+  .mock-bar {
+    height: 8px; border-radius: 4px; margin-bottom: 8px;
+    background: rgba(255,255,255,0.15);
+  }
+  .mock-bar.short { width: 55%; }
+  .mock-bar.medium { width: 80%; }
+  .mock-bar.long { width: 95%; }
+  .mock-circle {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(255,255,255,0.2); margin-bottom: 10px;
+  }
+  .mock-grid { display: flex; gap: 6px; margin-top: 10px; }
+  .mock-box {
+    flex: 1; height: 36px; border-radius: 6px;
+    background: rgba(255,255,255,0.1);
+  }
+  .card-tag {
+    position: absolute; top: 12px; right: 12px;
+    background: rgba(0,0,0,0.5); backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 0.25rem 0.65rem; border-radius: 100px;
+    font-size: 0.72rem; font-weight: 600; color: var(--accent); letter-spacing: 0.05em;
+  }
+  .card-body { padding: 1.3rem 1.5rem; }
+  .card-role {
+    font-size: 0.75rem; color: #8b5cf6; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.3rem;
+  }
+  .card-name { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
+  .card-desc { font-size: 0.83rem; color: var(--muted); }
+  .card-footer {
+    padding: 0 1.5rem 1.3rem;
+    display: flex; gap: 0.5rem;
+  }
+  .card-pill {
+    font-size: 0.72rem; padding: 0.2rem 0.65rem; border-radius: 100px;
+    background: rgba(139,92,246,0.12); border: 1px solid rgba(139,92,246,0.2);
+    color: var(--muted);
+  }
+
+  /* ── PRICING ── */
+  #pricing { padding: 6rem 6%; }
+  .pricing-wrap {
+    max-width: 480px; margin: 0 auto; text-align: center;
+  }
+  .pricing-card {
+    padding: 2.5rem; border-radius: 24px;
+    position: relative; overflow: hidden;
+    border: 1px solid rgba(139,92,246,0.35);
+    background: rgba(139,92,246,0.06);
+  }
+  .pricing-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, #8b5cf6, #818cf8, #60a5fa, transparent);
+  }
+  .popular-badge {
+    position: absolute; top: -1px; right: 24px;
+    background: linear-gradient(135deg, #7c3aed, #4f46e5);
+    color: #fff; font-size: 0.72rem; font-weight: 700;
+    padding: 0.3rem 0.9rem; border-radius: 0 0 10px 10px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .price-row {
+    display: flex; align-items: baseline; justify-content: center; gap: 0.6rem;
+    margin: 1.5rem 0 0.5rem;
+  }
+  .price-old {
+    font-size: 1.5rem; font-weight: 500; color: var(--muted);
+    text-decoration: line-through; opacity: 0.7;
+  }
+  .price-new {
+    font-size: 4rem; font-weight: 700; letter-spacing: -0.04em;
+    background: linear-gradient(135deg, #c084fc, #818cf8);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .price-new sup { font-size: 1.8rem; vertical-align: top; margin-top: 0.7rem; display: inline-block; }
+  .price-note { color: var(--muted); font-size: 0.85rem; margin-bottom: 1.5rem; }
+
+  .promo-box {
+    background: rgba(192,132,252,0.07);
+    border: 1px dashed rgba(192,132,252,0.3);
+    border-radius: 12px; padding: 0.9rem 1.2rem;
+    margin: 1.2rem 0 1.8rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  }
+  .promo-left { text-align: left; }
+  .promo-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+  .promo-code {
+    font-size: 1.1rem; font-weight: 700; letter-spacing: 0.1em;
+    color: #c084fc;
+  }
+  .promo-saving {
+    background: rgba(192,132,252,0.15); border: 1px solid rgba(192,132,252,0.25);
+    color: #c084fc; font-size: 0.78rem; font-weight: 600;
+    padding: 0.3rem 0.8rem; border-radius: 8px; white-space: nowrap;
+  }
+
+  .feature-list {
+    list-style: none; text-align: left; margin: 1.5rem 0;
+    display: flex; flex-direction: column; gap: 0.75rem;
+  }
+  .feature-list li {
+    display: flex; align-items: center; gap: 0.75rem;
+    font-size: 0.92rem; color: var(--muted);
+  }
+  .feat-check {
+    width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0;
+    background: linear-gradient(135deg, rgba(124,58,237,0.4), rgba(79,70,229,0.3));
+    border: 1px solid rgba(139,92,246,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    padding: 6rem 6%;
+    text-align: center;
+  }
+  .contact-card {
+    max-width: 600px; margin: 0 auto;
+    padding: 3rem; border-radius: 24px;
+    position: relative; overflow: hidden;
+  }
+  .contact-card::after {
+    content: '';
+    position: absolute; bottom: -60px; right: -60px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: rgba(108,63,212,0.12);
+    filter: blur(40px);
+  }
+  .contact-email {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 1.1rem; font-weight: 500;
+    color: #c084fc; text-decoration: none;
+    margin: 1.5rem 0 0.5rem;
+    border-bottom: 1px solid rgba(192,132,252,0.3);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .contact-email:hover { color: #e9d5ff; border-color: rgba(192,132,252,0.7); }
+  .contact-sub { color: var(--muted); font-size: 0.9rem; margin-top: 0.75rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2rem 6%;
+    border-top: 1px solid var(--glass-border);
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    color: var(--muted); font-size: 0.82rem;
+  }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--text); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 680px) {
+    .nav-links { display: none; }
+    .nav-links.open {
+      display: flex; flex-direction: column; position: fixed;
+      top: 64px; left: 0; right: 0; padding: 1.5rem 6%;
+      background: rgba(7,7,20,0.95); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border); gap: 1.2rem;
+    }
+    .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--muted); border-radius: 2px; transition: 0.3s; }
+    h1 { font-size: 2.5rem; }
+    .hero-actions { flex-direction: column; align-items: center; }
+    .btn-primary, .btn-ghost { width: 100%; justify-content: center; max-width: 300px; }
+    footer { flex-direction: column; text-align: center; }
+  }
+  @media (min-width: 681px) {
+    .hamburger { display: none; }
+  }
+
+  /* ── FLOATING ORBS ── */
+  .orb {
+    position: fixed; border-radius: 50%;
+    pointer-events: none; z-index: 0;
+    filter: blur(80px); opacity: 0.15;
+    animation: orb-float linear infinite;
+  }
+  .orb-1 {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, #7c3aed, transparent);
+    top: -200px; left: -200px;
+    animation-duration: 20s;
+  }
+  .orb-2 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, #3b82f6, transparent);
+    bottom: -150px; right: -150px;
+    animation-duration: 25s; animation-delay: -10s;
+  }
+  @keyframes orb-float {
+    0%,100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(40px, 30px) scale(1.05); }
+    66% { transform: translate(-20px, 50px) scale(0.95); }
+  }
+
+  /* ── COPY CODE ── */
+  .copy-btn {
+    background: none; border: 1px solid rgba(192,132,252,0.3);
+    color: #c084fc; font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.78rem; font-weight: 600;
+    padding: 0.3rem 0.8rem; border-radius: 8px;
+    cursor: pointer; transition: background 0.2s, color 0.2s;
+    letter-spacing: 0.05em;
+  }
+  .copy-btn:hover { background: rgba(192,132,252,0.12); }
+  .copy-btn.copied { color: #86efac; border-color: rgba(134,239,172,0.3); }
+</style>
+</head>
+<body>
+
+<div class="mesh"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Folio<span>rise</span></div>
+  <div class="nav-links" id="navLinks">
+    <a href="#how">How It Works</a>
+    <a href="#examples">Examples</a>
+    <a href="#pricing">Pricing</a>
+    <a href="https://forms.gle/pAqUMnh6Kut1sACZ8" target="_blank" class="nav-cta">Get Started →</a>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="badge">
+    <span class="badge-dot"></span>
+    Now accepting new clients
+  </div>
+  <h1>
+    <span class="line1">Your Portfolio.</span>
+    <span class="line2">Built in Hours.</span>
+  </h1>
+  <p class="hero-sub">We design and build stunning custom portfolio websites for freelancers — so you land better clients without the tech headaches.</p>
+  <div class="hero-actions">
+    <a href="https://forms.gle/pAqUMnh6Kut1sACZ8" target="_blank" class="btn-primary">
+      ✦ &nbsp;Get My Portfolio
+    </a>
+    <a href="#examples" class="btn-ghost">
+      See Examples →
+    </a>
+  </div>
+  <div class="hero-scroll">
+    Scroll to explore
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="section-header reveal">
+    <div class="section-label">The Process</div>
+    <h2 class="section-title">Three steps to your<br>dream portfolio</h2>
+    <p class="section-sub">We handle everything — design, code, and launch. You just show up and approve.</p>
+  </div>
+  <div class="steps-grid">
+    <div class="glass step-card reveal reveal-delay-1">
+      <div class="step-num">01</div>
+      <div class="step-icon">📋</div>
+      <h3>Fill the Form</h3>
+      <p>Tell us about your work, style, and goals. Takes 5 minutes. We handle the rest from there.</p>
+    </div>
+    <div class="glass step-card reveal reveal-delay-2">
+      <div class="step-num">02</div>
+      <div class="step-icon">🎨</div>
+      <h3>Get Your Preview</h3>
+      <p>We design a custom portfolio mockup tailored to your brand — delivered within 24 hours.</p>
+    </div>
+    <div class="glass step-card reveal reveal-delay-3">
+      <div class="step-num">03</div>
+      <div class="step-icon">🚀</div>
+      <h3>Unlock the Full Site</h3>
+      <p>Love it? Pay once, get the full build — live, optimised, and ready to impress clients.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EXAMPLES -->
+<section id="examples">
+  <div class="section-header reveal">
+    <div class="section-label">Portfolio Styles</div>
+    <h2 class="section-title">Made for every<br>type of creative</h2>
+    <p class="section-sub">From developers to designers to writers — we craft portfolios that feel authentically <em>you</em>.</p>
+  </div>
+  <div class="examples-grid">
+
+    <div class="glass portfolio-card reveal reveal-delay-1">
+      <div class="card-preview card-preview-1">
+        <div class="card-preview-mock">
+          <div class="mock-circle"></div>
+          <div class="mock-bar long"></div>
+          <div class="mock-bar medium"></div>
+          <div class="mock-bar short"></div>
+          <div class="mock-grid">
+            <div class="mock-box"></div>
+            <div class="mock-box"></div>
+          </div>
+        </div>
+        <div class="card-tag">Developer</div>
+      </div>
+      <div class="card-body">
+        <div class="card-role">Full-Stack Engineer</div>
+        <div class="card-name">Alex Rivera — Dev Portfolio</div>
+        <div class="card-desc">Clean, dark-mode layout with project showcases and GitHub integration.</div>
+      </div>
+      <div class="card-footer">
+        <span class="card-pill">Dark Mode</span>
+        <span class="card-pill">Minimal</span>
+        <span class="card-pill">Code-first</span>
+      </div>
+    </div>
+
+    <div class="glass portfolio-card reveal reveal-delay-2">
+      <div class="card-preview card-preview-2">
+        <div class="card-preview-mock">
+          <div class="mock-bar short" style="height:14px;border-radius:7px;margin-bottom:12px;background:rgba(255,255,255,0.25)"></div>
+          <div class="mock-bar long" style="height:10px;border-radius:5px;background:rgba(255,255,255,0.12)"></div>
+          <div class="mock-bar medium" style="height:10px;border-radius:5px;margin-top:6px;background:rgba(255,255,255,0.12)"></div>
+          <div class="mock-grid" style="margin-top:14px;gap:8px">
+            <div class="mock-box" style="height:50px;border-radius:10px;background:rgba(255,255,255,0.15)"></div>
+            <div class="mock-box" style="height:50px;border-radius:10px;background:rgba(255,255,255,0.09)"></div>
+            <div class="mock-box" style="height:50px;border-radius:10px;background:rgba(255,255,255,0.06)"></div>
+          </div>
+        </div>
+        <div class="card-tag">Designer</div>
+      </div>
+      <div class="card-body">
+        <div class="card-role">UI/UX Designer</div>
+        <div class="card-name">Maya Chen — Design Portfolio</div>
+        <div class="card-desc">Visual-first layout with case study highlights and a bold typographic hero.</div>
+      </div>
+      <div class="card-footer">
+        <span class="card-pill">Visual</span>
+        <span class="card-pill">Editorial</span>
+        <span class="card-pill">Bold type</span>
+      </div>
+    </div>
+
+    <div class="glass portfolio-card reveal reveal-delay-3">
+      <div class="card-preview card-preview-3">
+        <div class="card-preview-mock">
+          <div class="mock-bar medium" style="height:12px;border-radius:6px;background:rgba(255,255,255,0.2);margin-bottom:10px"></div>
+          <div class="mock-bar long" style="height:8px;border-radius:4px;background:rgba(255,255,255,0.1)"></div>
+          <div class="mock-bar long" style="height:8px;border-radius:4px;background:rgba(255,255,255,0.08);margin-top:5px"></div>
+          <div class="mock-bar medium" style="height:8px;border-radius:4px;background:rgba(255,255,255,0.06);margin-top:5px"></div>
+          <div style="margin-top:12px;display:flex;gap:6px">
+            <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.18)"></div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:4px;justify-content:center">
+              <div class="mock-bar short" style="height:6px;border-radius:3px;background:rgba(255,255,255,0.15)"></div>
+              <div class="mock-bar medium" style="height:6px;border-radius:3px;background:rgba(255,255,255,0.08)"></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-tag">Writer</div>
+      </div>
+      <div class="card-body">
+        <div class="card-role">Freelance Copywriter</div>
+        <div class="card-name">Jordan Ellis — Writer Portfolio</div>
+        <div class="card-desc">Warm, editorial-style design with published works, testimonials, and a contact form.</div>
+      </div>
+      <div class="card-footer">
+        <span class="card-pill">Warm</span>
+        <span class="card-pill">Editorial</span>
+        <span class="card-pill">Testimonials</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-header reveal">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-title">One price. Everything included.</h2>
+    <p class="section-sub">No subscriptions. No hidden fees. Just a premium portfolio that works.</p>
+  </div>
+  <div class="pricing-wrap">
+    <div class="pricing-card reveal">
+      <div class="popular-badge">🔥 Early Bird</div>
+
+      <div class="price-row">
+        <span class="price-old">$149.99</span>
+        <span class="price-new"><sup>$</sup>75</span>
+      </div>
+      <p class="price-note">One-time payment · Limited early-bird spots</p>
+
+      <div class="promo-box">
+        <div class="promo-left">
+          <div class="promo-label">Use discount code</div>
+          <div class="promo-code" id="promoCode">EARLY50</div>
+        </div>
+        <button class="copy-btn" id="copyBtn" onclick="copyCode()">Copy code</button>
+      </div>
+
+      <ul class="feature-list">
+        <li><span class="feat-check">✓</span> Custom-designed portfolio (not a template)</li>
+        <li><span class="feat-check">✓</span> Mobile-responsive &amp; fast-loading</li>
+        <li><span class="feat-check">✓</span> Up to 6 project showcases</li>
+        <li><span class="feat-check">✓</span> Contact form + social links</li>
+        <li><span class="feat-check">✓</span> Delivered within 48 hours</li>
+        <li><span class="feat-check">✓</span> 1 round of free revisions</li>
+        <li><span class="feat-check">✓</span> Source files included</li>
+      </ul>
+
+      <a href="https://forms.gle/pAqUMnh6Kut1sACZ8" target="_blank" class="btn-primary" style="width:100%;justify-content:center;font-size:1.05rem;padding:1rem;">
+        ✦ &nbsp;Claim My Spot →
+      </a>
+      <p style="margin-top:1rem;font-size:0.78rem;color:var(--muted);">50% off for the first 20 clients only. <strong style="color:var(--text)">12 spots remaining.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-card glass reveal">
+    <div class="section-label" style="text-align:center">Have questions?</div>
+    <h2 class="section-title">Let's talk</h2>
+    <p class="hero-sub" style="margin: 0 auto; margin-top:0.75rem;">Not sure if this is right for you? Drop us a message — we reply within a few hours.</p>
+    <div style="margin-top:1.8rem">
+      <a href="mailto:afaqakbar24@gmail.com" class="contact-email">
+        ✉ &nbsp;afaqakbar24@gmail.com
+      </a>
+    </div>
+    <p class="contact-sub">Or fill out the form and we'll reach out to you first.</p>
+    <div style="margin-top:2rem">
+      <a href="https://forms.gle/pAqUMnh6Kut1sACZ8" target="_blank" class="btn-primary">
+        ✦ &nbsp;Fill Out the Form →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo" style="font-size:1.1rem">Folio<span>rise</span></div>
+  <span>© 2025 Foliorise · All rights reserved.</span>
+  <span>Made with ✦ for freelancers everywhere</span>
+</footer>
+
+<script>
+  // ── SCROLL REVEAL ──
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // ── MOBILE NAV ──
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  // ── COPY PROMO CODE ──
+  function copyCode() {
+    navigator.clipboard.writeText('EARLY50').then(() => {
+      const btn = document.getElementById('copyBtn');
+      btn.textContent = '✓ Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = 'Copy code';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  }
+
+  // ── SUBTLE CURSOR GLOW ──
+  const glow = document.createElement('div');
+  Object.assign(glow.style, {
+    position: 'fixed', width: '320px', height: '320px',
+    borderRadius: '50%', pointerEvents: 'none', zIndex: '0',
+    background: 'radial-gradient(circle, rgba(124,58,237,0.07) 0%, transparent 70%)',
+    transform: 'translate(-50%,-50%)', transition: 'left 0.6s ease, top 0.6s ease',
+    left: '-999px', top: '-999px'
+  });
+  document.body.appendChild(glow);
+  window.addEventListener('mousemove', e => {
+    glow.style.left = e.clientX + 'px';
+    glow.style.top = e.clientY + 'px';
+  });
+
+  // ── SMOOTH CLOSE NAV ON LINK CLICK ──
+  document.querySelectorAll('#navLinks a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+</script>
+</body>
+</html>
+
+</body>
+</html>
+
